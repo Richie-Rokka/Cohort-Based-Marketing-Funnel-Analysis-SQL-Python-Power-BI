@@ -3,6 +3,10 @@
 
 ---
 
+![Cohort Dashboard](assets/images/cohort_dashboard.png)
+
+![Comparison](assets/images/snapshot_vs_cohort.png)
+
 ## 🚀 Overview
 
 Most marketing funnel analyses rely on **snapshot data**, which can lead to misleading conclusions about performance.
@@ -159,7 +163,7 @@ With cohort analysis:
 
 ## 🔗 Project Links
 
-- 📂 GitHub Repository: *([Add your link here](https://github.com/Richie-Rokka/Cohort-Based-Marketing-Funnel-Analysis-SQL-Python-Power-BI))*  
+- 📂 GitHub Repository: [ link here](https://github.com/Richie-Rokka/Cohort-Based-Marketing-Funnel-Analysis-SQL-Python-Power-BI)
 - 📊 Dashboard Preview: *(Add Power BI screenshot or link)*  
 
 ---
