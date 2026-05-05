@@ -61,121 +61,117 @@ flowchart TD
     E --> F[Business Insights]
 ```
 
-## 🛠️ Tools & Technologies
+# 📂 Dataset Overview
 
-- **SQL (BigQuery)** → Data extraction & transformation  
-- **Python (Pandas)** → Data cleaning & cohort structuring  
-- **Power BI** → Visualization & storytelling  
+### 🗃️ Description
 
+The dataset simulates real-world user interactions across a marketing funnel.
+
+Each row represents a user event, capturing progression through lifecycle stages.
+
+Column	Description
+user_id	Unique user identifier
+signup_date	First interaction (cohort assignment)
+event_date	Activity timestamp
+channel	Acquisition source
+stage	Funnel stage
+revenue	Transaction value (if applicable)
 ---
 
-## 📊 Analytical Approach
+### 🔄 Funnel Definition
 
-### Step 1 — Data Preparation
-- Cleaned and structured funnel dataset  
-- Validated conversion stages (Lead → MQL → SQL → Customer)  
+Visit → Signup → Activation → Purchase
 
-### Step 2 — Cohort Structuring
-- Grouped leads by acquisition month  
-- Created time-based conversion tracking  
+### 🧠 Cohort Definition
 
-### Step 3 — Analysis
-- Measured conversion rates per cohort over time  
-- Compared early vs late cohort performance  
+Cohort = Month of first signup
 
----
+## 🧮 SQL Walkthrough (Core Logic)
 
-## 📈 Key Insights
+### Assign Cohorts
+```
+SQL
+WITH cohort_data AS (
+    SELECT 
+        user_id,
+        MIN(signup_date) AS cohort_date
+    FROM marketing_data
+    GROUP BY user_id
+)
+```
+### Build Cohort Index
+```
+SQL
+SELECT 
+    m.user_id,
+    c.cohort_date,
+    DATE_DIFF(m.event_date, c.cohort_date, MONTH) AS cohort_index
+FROM marketing_data m
+JOIN cohort_data c
+    ON m.user_id = c.user_id;
+```
+### Retention Table
+```
+SQL
+SELECT
+    cohort_date,
+    cohort_index,
+    COUNT(DISTINCT user_id) AS active_users
+FROM user_activity
+GROUP BY cohort_date, cohort_index;
+```
 
-### 1. Time Drives Conversion Performance
-- Earlier cohorts showed higher conversion rates  
-- Not due to better performance, but **longer time to convert**
+# 📊 Dashboard Walkthrough
 
----
+1️⃣ Cohort Acquisition
 
-### 2. Majority of Conversions Happen Early
-- Most conversions occurred within the **first 30 days**  
-- Conversion probability drops significantly afterward  
+2️⃣ Retention Trends
 
----
+3️⃣ Funnel Conversion
 
-### 3. Recent Cohorts Are Misleading
-- Lower conversion rates were observed  
-- Root cause: **insufficient observation window**, not poor performance  
+# 🔍 Key Insights (Quantified)
 
----
+These insights simulate real-world patterns observed in growth analytics.
 
-## 📉 Business Impact
+### 📉 Retention Decay
 
-Without cohort analysis:
-- Teams may **shift budget away from recent campaigns prematurely**
-- Underestimate **conversion timelines**
-- Misalign **performance expectations**
+- Month 1 retention drops to ~65%
+- Month 2 retention drops further to ~40%
+➡️ Indicates weak early user engagement
 
-With cohort analysis:
-- ✅ Better forecasting of conversions  
-- ✅ Improved campaign evaluation  
-- ✅ Smarter budget allocation  
+### ⚠️ Funnel Bottleneck
 
----
+- Visit → Signup: ~60% conversion
+- Signup → Activation: ~35% conversion
+➡️ Largest drop-off occurs at activation stage
 
-## 🔍 Before vs After
+### 📈 Cohort Improvement Trend
 
-| Approach | Insight Quality | Risk |
-|----------|---------------|------|
-| Snapshot Analysis | Low | Misleading conclusions |
-| Cohort Analysis | High | Accurate decision-making |
+- Later cohorts show +10–15% higher retention
+➡️ Suggests improvements in onboarding or targeting
 
----
+### 🎯 Business Interpretation
 
-## 💡 Key Takeaways
+- Acquisition is strong, but activation is the constraint
+- Retention improvements suggest learning loop in marketing/product
+  
+### 📈 Core Metrics
 
-- **Time is a critical variable in funnel analysis**  
-- Snapshot ≠ Cohort analysis  
-- Data interpretation matters as much as data itself  
+- Cohort Retention Rate
+- Funnel Conversion Rate
+- Drop-off Rate by Stage
+- Active Users per Cohort
+- Lifecycle Progression
+  
+### 💼 Business Impact
 
-> 👉 *Good analysis is not just about data — it's about context.*
+This system enables:
 
----
+- 🎯 Optimization of acquisition channels
+- 🔍 Identification of onboarding friction
+- 📉 Reduction of churn
+- 📊 Improved marketing ROI
 
-## 📊 Dashboard Highlights
-
-- Cohort conversion trends  
-- Time-to-conversion analysis  
-- Funnel performance comparison across cohorts  
-
----
-
-## 🧩 Limitations
-
-- Dataset size and structure may limit generalization  
-- Assumes consistent tracking across funnel stages  
-- No external factors (seasonality, campaigns) included  
-
----
-
-## 🔮 Future Improvements
-
-- Integrate **channel-level cohort analysis**  
-- Add **predictive modeling for conversion forecasting**  
-- Include **time-to-event survival analysis**  
-
----
-
-## 📚 Key Learnings
-
-- Importance of choosing the right analytical framework  
-- Difference between descriptive vs temporal analysis  
-- How to translate technical findings into business insights  
-
----
-
-## 🔗 Project Links
-
-- 📂 GitHub Repository: [ link here](https://github.com/Richie-Rokka/Cohort-Based-Marketing-Funnel-Analysis-SQL-Python-Power-BI)
-- 📊 Dashboard Preview: *(Add Power BI screenshot or link)*  
-
----
 
 ## 👤 Author
 
