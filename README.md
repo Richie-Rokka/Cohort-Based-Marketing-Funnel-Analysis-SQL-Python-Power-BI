@@ -136,11 +136,12 @@ flowchart TD
     D --> E[Build Funnel Metrics]
     E --> F[Dashboard Visualization]
 ```
-```sql
+```
+sql
 -- Cohort Index Calculation
 DATE_DIFF(event_date, cohort_date, MONTH) AS cohort_index
 ```
-
+---
 ## ⚙️ Why This Structure Matters
 
 This data model enables:
