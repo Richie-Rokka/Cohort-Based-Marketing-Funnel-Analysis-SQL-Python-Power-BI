@@ -1,5 +1,4 @@
 -- Cohort Funnel Analytics SQL Starter Pack
--- Replace dataset.table names with your BigQuery table names.
 
 -- 1. Cohort size by acquisition month
 SELECT
