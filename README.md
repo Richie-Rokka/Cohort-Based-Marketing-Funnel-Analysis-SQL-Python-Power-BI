@@ -64,22 +64,99 @@ flowchart TD
     D --> E[Dashboard Layer]
     E --> F[Business Insights]
 ```
+---
 
-## 📂 Dataset Overview
+# 📂 Dataset & Data Structure
 
-### 🗃️ Description
+## 🗃️ Data Overview
 
-The dataset simulates real-world user interactions across a marketing funnel.
+The dataset simulates **user-level event data across a marketing funnel**, capturing how users progress from acquisition to conversion.
 
-Each row represents a user event, capturing progression through lifecycle stages.
+Each row represents a **single user event**, not a user summary.
 
-### 🔄 Funnel Definition
+---
 
+## 🧱 Data Grain
+
+> **Grain:** One row per *user per event per date*
+
+This means:
+- A single user can appear multiple times
+- Each row reflects a stage interaction (e.g., Visit, Signup)
+
+---
+
+## 📊 Sample Data
+
+| user_id | signup_date | event_date | stage      | channel  | revenue |
+|--------|------------|------------|------------|----------|---------|
+| 1001   | 2023-01-05 | 2023-01-05 | Visit      | Organic  | 0       |
+| 1001   | 2023-01-05 | 2023-01-06 | Signup     | Organic  | 0       |
+| 1001   | 2023-01-05 | 2023-01-08 | Activation | Organic  | 0       |
+| 1001   | 2023-01-05 | 2023-01-10 | Purchase   | Organic  | 120     |
+
+---
+
+## 🔄 Funnel Logic
+
+```text
 Visit → Signup → Activation → Purchase
+```
+Users progress through stages, but:
+- Not all users complete the funnel
+- Drop-offs occur at each stage
 
-### 🧠 Cohort Definition
+---
+## 🧠 Cohort Definition
+> Cohort = Month of first signup
 
-Cohort = Month of first signup
+Example:
+- User signs up Jan 2023 → belongs to Jan cohort
+- All future activity is tracked relative to this cohort
+
+---
+
+## 🧮 Derived Fields (Created During Analysis)
+
+| Field            | Description                                              |
+|------------------|----------------------------------------------------------|
+| `cohort_date`    | Month of user’s first signup (cohort assignment)          |
+| `cohort_index`   | Number of months since signup (0 = acquisition period)    |
+| `active_flag`    | Binary indicator of user activity within a given period   |
+| `conversion_flag`| Binary indicator of funnel stage completion               |
+
+---
+
+## 🔁 Data Transformation Flow
+```mermaid
+flowchart TD
+ A[Raw Event Data] --> B[Assign Cohorts]
+    B --> C[Calculate Cohort Index]
+    C --> D[Aggregate Retention Metrics]
+    D --> E[Build Funnel Metrics]
+    E --> F[Dashboard Visualization]
+```
+```sql
+-- Cohort Index Calculation
+DATE_DIFF(event_date, cohort_date, MONTH) AS cohort_index
+```
+
+## ⚙️ Why This Structure Matters
+
+This data model enables:
+- Cohort retention tracking over time
+- Funnel conversion analysis by stage
+- Cross-cohort performance comparison
+- Identification of lifecycle bottlenecks
+
+---
+
+## ⚠️ Assumptions
+- Users follow a linear funnel progression
+- signup_date represents first meaningful interaction
+- Missing stages indicate drop-off
+
+---
 
 ## 🧮 SQL Walkthrough (Core Logic)
 
@@ -115,6 +192,7 @@ SELECT
 FROM user_activity
 GROUP BY cohort_date, cohort_index;
 ```
+---
 
 ## 📊 Dashboard Walkthrough
 
@@ -256,4 +334,3 @@ This project demonstrates how to move from vanity metrics → actionable growth 
 Data Analyst | Business Intelligence | Revenue & Operations Analytics  
 
 > “Turning data into business decisions.”
----
