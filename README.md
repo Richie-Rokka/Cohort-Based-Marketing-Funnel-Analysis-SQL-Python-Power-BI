@@ -17,7 +17,7 @@ By integrating **cohort retention + funnel conversion analysis**, this project a
 
 ---
 
-# 🎯 Business Problem
+## 🎯 Business Problem
 
 Traditional marketing dashboards focus on:
 - Total users  
@@ -39,7 +39,7 @@ Without cohort-level analysis:
 
 ---
 
-# 🧠 Solution
+## 🧠 Solution
 
 This project implements a **Growth Analytics Framework** that:
 
@@ -50,7 +50,7 @@ This project implements a **Growth Analytics Framework** that:
 
 ---
 
-# 🏗️ Architecture
+## 🏗️ Architecture
 
 ```mermaid
 flowchart TD
@@ -61,22 +61,13 @@ flowchart TD
     E --> F[Business Insights]
 ```
 
-# 📂 Dataset Overview
+## 📂 Dataset Overview
 
 ### 🗃️ Description
 
 The dataset simulates real-world user interactions across a marketing funnel.
 
 Each row represents a user event, capturing progression through lifecycle stages.
-
-Column	Description
-user_id	Unique user identifier
-signup_date	First interaction (cohort assignment)
-event_date	Activity timestamp
-channel	Acquisition source
-stage	Funnel stage
-revenue	Transaction value (if applicable)
----
 
 ### 🔄 Funnel Definition
 
@@ -121,57 +112,93 @@ FROM user_activity
 GROUP BY cohort_date, cohort_index;
 ```
 
-# 📊 Dashboard Walkthrough
+## 📊 Dashboard Walkthrough
 
-1️⃣ Cohort Acquisition
+### 1️⃣ Cohort Acquisition
+- Tracks user acquisition trends across time  
+- Compares cohort sizes and initial engagement  
 
-2️⃣ Retention Trends
+### 2️⃣ Retention Trends
+- Visualizes retention decay across cohorts  
+- Identifies churn patterns and engagement drop-off  
 
-3️⃣ Funnel Conversion
+### 3️⃣ Funnel Conversion
+- Measures user progression across lifecycle stages  
+- Highlights key conversion bottlenecks  
 
-# 🔍 Key Insights (Quantified)
+---
 
-These insights simulate real-world patterns observed in growth analytics.
+## ⚡ Key Insights (Executive Summary)
+
+- 📉 **Retention drops to ~65% (Month 1) and ~40% (Month 2)**  
+- ⚠️ **Major funnel drop-off at Signup → Activation (~35%)**  
+- 📈 **Later cohorts show +10–15% retention improvement**  
+- 🎯 **Activation—not acquisition—is the primary growth constraint**
+
+---
+
+## 🔍 Insight Breakdown
 
 ### 📉 Retention Decay
+- Month 1: ~65% retention  
+- Month 2: ~40% retention  
+➡️ Indicates weak early engagement and onboarding gaps  
 
-- Month 1 retention drops to ~65%
-- Month 2 retention drops further to ~40%
-➡️ Indicates weak early user engagement
+---
 
 ### ⚠️ Funnel Bottleneck
+- Visit → Signup: ~60% conversion  
+- Signup → Activation: ~35% conversion  
+➡️ Largest drop-off occurs at activation stage  
 
-- Visit → Signup: ~60% conversion
-- Signup → Activation: ~35% conversion
-➡️ Largest drop-off occurs at activation stage
+---
 
 ### 📈 Cohort Improvement Trend
+- Later cohorts show +10–15% higher retention  
+➡️ Suggests improvements in targeting or onboarding  
 
-- Later cohorts show +10–15% higher retention
-➡️ Suggests improvements in onboarding or targeting
+---
 
 ### 🎯 Business Interpretation
+- Strong acquisition performance, but weak activation  
+- Retention improvements indicate iterative optimization  
+- Growth is constrained by mid-funnel inefficiencies  
 
-- Acquisition is strong, but activation is the constraint
-- Retention improvements suggest learning loop in marketing/product
-  
-### 📈 Core Metrics
+---
 
-- Cohort Retention Rate
-- Funnel Conversion Rate
-- Drop-off Rate by Stage
-- Active Users per Cohort
-- Lifecycle Progression
-  
-### 💼 Business Impact
+## 📈 Core Metrics
 
-This system enables:
+- Cohort Retention Rate  
+- Funnel Conversion Rate  
+- Drop-off Rate by Stage  
+- Active Users per Cohort  
+- Lifecycle Progression  
 
-- 🎯 Optimization of acquisition channels
-- 🔍 Identification of onboarding friction
-- 📉 Reduction of churn
-- 📊 Improved marketing ROI
+---
 
+## 💼 Business Impact
+
+- 🎯 Optimize acquisition toward high-retention cohorts  
+- 🔍 Identify and fix onboarding friction  
+- 📉 Reduce churn through early engagement improvements  
+- 📊 Improve overall marketing ROI  
+
+---
+
+## 🔁 Reproducibility
+
+### 1. Data Preparation
+- Load dataset from `/data/`  
+- Validate date formats  
+
+### 2. SQL Analysis
+- Run `/sql/cohort_analysis.sql`  
+- Generate cohort tables  
+
+### 3. Python Processing
+```bash
+python python/data_preprocessing.py
+```
 
 ## 👤 Author
 
