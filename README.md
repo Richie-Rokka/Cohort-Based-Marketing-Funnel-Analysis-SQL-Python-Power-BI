@@ -116,15 +116,24 @@ GROUP BY cohort_date, cohort_index;
 
 ### 1️⃣ Cohort Acquisition
 - Tracks user acquisition trends across time  
-- Compares cohort sizes and initial engagement  
+- Compares cohort sizes and initial engagement
+
+<img width="619" height="347" alt="cohort_acquisition" src="https://github.com/user-attachments/assets/3f29bcba-185a-427e-95d8-2e52a49b5367" />
+
 
 ### 2️⃣ Retention Trends
 - Visualizes retention decay across cohorts  
-- Identifies churn patterns and engagement drop-off  
+- Identifies churn patterns and engagement drop-off
+
+<img width="614" height="348" alt="retention_analysis" src="https://github.com/user-attachments/assets/e7496520-7128-46aa-989d-e4400be666b9" />
+
 
 ### 3️⃣ Funnel Conversion
 - Measures user progression across lifecycle stages  
-- Highlights key conversion bottlenecks  
+- Highlights key conversion bottlenecks
+
+<img width="617" height="346" alt="funnel_conversion" src="https://github.com/user-attachments/assets/8cc627da-763a-4782-9df1-7af3b5f3e432" />
+
 
 ---
 
