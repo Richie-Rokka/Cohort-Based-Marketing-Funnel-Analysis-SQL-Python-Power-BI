@@ -2,6 +2,10 @@
 ### From Acquisition to Retention: A Growth Analytics Case Study
 
 ---
+## 📊 Dashboard Preview
+
+![Cohort Acquisition](cohort_acquisition.png)
+
 
 # 🧭 Executive Summary
 
@@ -208,6 +212,43 @@ GROUP BY cohort_date, cohort_index;
 ```bash
 python python/data_preprocessing.py
 ```
+### 4. Dashboard
+- Open /dashboard/cohort_dashboard.pbix
+- Refresh data model
+
+---
+
+## 🧰 Tools & Technologies
+- SQL → Cohort modeling
+- Python (Pandas) → Data cleaning
+- Power BI → Visualization
+- GitHub → Version control
+
+---
+
+## 🧠 Key Learnings
+- Cohort analysis reveals **hidden retention dynamics**
+- Funnel analysis identifies **conversion bottlenecks**
+- Growth requires integrating **acquisition + retention + conversion**
+- Structuring projects like systems improves **analytical clarity**
+
+---
+## 🚀 Future Improvements
+- Add Customer Lifetime Value (LTV)
+- Build churn prediction model
+- Automate ETL pipeline
+- Deploy dashboard online
+
+---
+
+## 🧾 Final Takeaway
+
+This project demonstrates how to move from vanity metrics → actionable growth insights.
+
+>Growth is not about acquiring users.
+>It’s about acquiring users who stay and convert.
+
+---
 
 ## 👤 Author
 
@@ -215,3 +256,4 @@ python python/data_preprocessing.py
 Data Analyst | Business Intelligence | Revenue & Operations Analytics  
 
 > “Turning data into business decisions.”
+---
