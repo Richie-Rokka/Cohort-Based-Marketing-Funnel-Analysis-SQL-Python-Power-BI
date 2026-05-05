@@ -1,56 +1,65 @@
 # 📊 Cohort-Based Marketing Funnel Analysis  
-**From Misleading Snapshots to Accurate Conversion Insights**
+### From Acquisition to Retention: A Growth Analytics Case Study
 
 ---
 
-![Cohort Dashboard](./Cohort_Funnel_Analytics_Executive Summary.png)
+# 🧭 Executive Summary
 
-![Comparison](assets/images/snapshot_vs_cohort.png)
+Most marketing teams optimize for acquisition—but **growth is driven by retention and conversion**.
 
-## 🚀 Overview
+This project builds a **Cohort-Based Funnel Analysis System** to evaluate how users behave over time, identifying where value is created—and where it is lost.
 
-Most marketing funnel analyses rely on **snapshot data**, which can lead to misleading conclusions about performance.
+By integrating **cohort retention + funnel conversion analysis**, this project answers:
 
-In this project, I rebuilt a funnel analysis using a **cohort-based approach** to accurately track how leads convert over time and uncover true performance patterns.
-
-> 💡 Key Shift: From *“What does performance look like now?”* → to *“How does performance evolve over time?”*
-
----
-
-## 🎯 Business Problem
-
-A traditional funnel analysis suggested that:
-- February outperformed March in conversion rates
-
-However, this raised a critical question:
-
-> ❓ *Are we measuring performance correctly, or just misinterpreting time-based data?*
+- Are newly acquired users actually retaining?
+- Where do users drop off in the lifecycle?
+- Which cohorts generate long-term value?
 
 ---
 
-## ⚠️ The Problem with Snapshot Analysis
+# 🎯 Business Problem
 
-Snapshot funnel analysis:
-- Captures performance at a single point in time  
-- Ignores how long leads have had to convert  
-- Can unfairly compare newer vs older leads  
+Traditional marketing dashboards focus on:
+- Total users  
+- Campaign performance  
+- Monthly growth  
 
-### Result:
-❌ Overestimation of recent performance  
-❌ Misleading channel effectiveness  
-❌ Poor decision-making  
+But they fail to answer:
+- Which users are worth acquiring?
+- Where does the funnel break?
+- Is growth sustainable?
+
+### ❗ Business Risk
+
+Without cohort-level analysis:
+- Marketing spend is misallocated  
+- Retention issues go undetected  
+- Funnel inefficiencies reduce ROI  
+- Growth metrics become misleading  
+
+---
+
+# 🧠 Solution
+
+This project implements a **Growth Analytics Framework** that:
+
+1. Segments users into cohorts based on acquisition date  
+2. Tracks retention across time (Month 0, Month 1, Month 2…)  
+3. Measures funnel progression across lifecycle stages  
+4. Surfaces insights through a dashboard  
 
 ---
 
-## 🧠 Solution: Cohort-Based Analysis
+# 🏗️ Architecture
 
-To solve this, I implemented a **cohort analysis framework**:
-
-- Grouped leads by acquisition period (monthly cohorts)  
-- Tracked each cohort’s conversion over time  
-- Compared performance across cohorts based on lifecycle stage  
-
----
+```mermaid
+flowchart TD
+    A[Raw Marketing Data] --> B[SQL Cohort Transformation]
+    B --> C[Python Data Cleaning]
+    C --> D[Cohort Tables]
+    D --> E[Dashboard Layer]
+    E --> F[Business Insights]
+```
 
 ## 🛠️ Tools & Technologies
 
