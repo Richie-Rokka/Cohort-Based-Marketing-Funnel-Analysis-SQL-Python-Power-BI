@@ -159,40 +159,159 @@ This data model enables:
 
 ---
 
-## 🧮 SQL Walkthrough (Core Logic)
+### 🧮 Cohort Analysis SQL Walkthrough
 
-### Assign Cohorts
-```
-SQL
+```sql
+-- =========================================
+-- Cohort-Based Retention Analysis Pipeline
+-- =========================================
+
 WITH cohort_data AS (
+    -- Step 1: Assign each user to a cohort (first signup date)
     SELECT 
         user_id,
         MIN(signup_date) AS cohort_date
     FROM marketing_data
     GROUP BY user_id
+),
+
+user_activity AS (
+    -- Step 2: Map user activity to cohort and calculate time offset
+    SELECT 
+        m.user_id,
+        c.cohort_date,
+        m.event_date,
+
+        -- cohort_index = months since signup (0 = acquisition month)
+        DATE_DIFF(m.event_date, c.cohort_date, MONTH) AS cohort_index
+    FROM marketing_data m
+    JOIN cohort_data c
+        ON m.user_id = c.user_id
+),
+
+cohort_retention AS (
+    -- Step 3: Aggregate active users by cohort and period
+    SELECT
+        cohort_date,
+        cohort_index,
+        COUNT(DISTINCT user_id) AS active_users
+    FROM user_activity
+    WHERE cohort_index >= 0
+    GROUP BY cohort_date, cohort_index
+),
+
+cohort_size AS (
+    -- Step 4: Calculate total users in each cohort
+    SELECT
+        cohort_date,
+        COUNT(DISTINCT user_id) AS total_users
+    FROM cohort_data
+    GROUP BY cohort_date
 )
-```
-### Build Cohort Index
-```
-SQL
+
+-- Step 5: Final output with retention rate
 SELECT 
-    m.user_id,
-    c.cohort_date,
-    DATE_DIFF(m.event_date, c.cohort_date, MONTH) AS cohort_index
-FROM marketing_data m
-JOIN cohort_data c
-    ON m.user_id = c.user_id;
+    r.cohort_date,
+    r.cohort_index,
+    r.active_users,
+    s.total_users,
+
+    -- Retention rate = active users / total cohort size
+    ROUND(r.active_users * 1.0 / s.total_users, 2) AS retention_rate
+
+FROM cohort_retention r
+JOIN cohort_size s
+    ON r.cohort_date = s.cohort_date
+
+ORDER BY r.cohort_date, r.cohort_index;
 ```
-### Retention Table
-```
-SQL
-SELECT
-    cohort_date,
-    cohort_index,
-    COUNT(DISTINCT user_id) AS active_users
-FROM user_activity
-GROUP BY cohort_date, cohort_index;
-```
+
+## 🎨 Cohort Heatmap (How to Read the Output)
+
+The final SQL output can be visualized as a **cohort heatmap**, where each row represents a cohort and each column represents time since acquisition.
+
+### 📊 Structure
+
+| Cohort (Signup Month) | Month 0 | Month 1 | Month 2 | Month 3 |
+|------------------------|--------|--------|--------|--------|
+| Jan 2023              | 100%   | 65%    | 42%    | 30%    |
+| Feb 2023              | 100%   | 70%    | 50%    | 38%    |
+| Mar 2023              | 100%   | 75%    | 55%    | —      |
+
+- **Rows (Y-axis)** → `cohort_date` (grouped by signup month)  
+- **Columns (X-axis)** → `cohort_index` (months since signup)  
+- **Cell values** → `retention_rate`  
+
+---
+
+### 🎯 What the Colors Represent
+
+In a heatmap:
+- 🟢 **Darker/stronger color** → Higher retention  
+- 🔴 **Lighter/weaker color** → Lower retention  
+
+This allows you to quickly identify:
+- High-performing cohorts  
+- Retention decay patterns  
+- Improvements across time  
+
+---
+
+### 🔍 How to Interpret
+
+#### 1. Retention Decay (Left → Right)
+- Each row shows how a cohort retains over time  
+- A steep drop indicates **poor early engagement**
+
+👉 Example:  
+Jan cohort drops from **100% → 42% by Month 2** → weak retention
+
+---
+
+#### 2. Cohort Comparison (Top → Bottom)
+- Compare rows to evaluate performance across cohorts  
+
+👉 Example:  
+Feb cohort retains **50% at Month 2 vs Jan’s 42%**  
+➡️ Indicates improvement in onboarding or acquisition quality  
+
+---
+
+#### 3. Diagonal Trends (Growth Signal)
+- Look diagonally to track performance improvements over time  
+
+👉 If later cohorts consistently retain better:  
+➡️ Suggests **product or marketing optimization is working**
+
+---
+
+### ⚠️ Key Patterns to Watch
+
+- **Sharp early drop (Month 0 → 1)** → Onboarding friction  
+- **Flat retention curve** → Strong product engagement  
+- **Improving cohorts over time** → Learning loop in growth strategy  
+- **Declining cohorts** → Potential product or channel issues  
+
+---
+
+### 💡 Business Insight Translation
+
+The heatmap helps answer:
+
+- Are we acquiring **high-quality users**?  
+- Where does **churn happen in the lifecycle**?  
+- Are changes in marketing or product **improving retention**?  
+
+---
+
+### 🧠 How This Connects to Your SQL
+
+- `cohort_date` → Rows  
+- `cohort_index` → Columns  
+- `retention_rate` → Heatmap values  
+
+👉 Your SQL output is directly **pivoted into this visual format** in the dashboard.
+
 ---
 
 ## 📊 Dashboard Walkthrough
@@ -288,7 +407,8 @@ GROUP BY cohort_date, cohort_index;
 - Generate cohort tables  
 
 ### 3. Python Processing
-```bash
+```
+bash
 python python/data_preprocessing.py
 ```
 ### 4. Dashboard
