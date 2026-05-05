@@ -3,7 +3,7 @@
 
 ---
 
-![Cohort Dashboard](assets/images/cohort_dashboard.png)
+![Cohort Dashboard](./Cohort_Funnel_Analytics_Executive Summary.png)
 
 ![Comparison](assets/images/snapshot_vs_cohort.png)
 
