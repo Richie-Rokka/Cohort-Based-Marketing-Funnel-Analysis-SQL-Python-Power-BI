@@ -322,7 +322,6 @@ The heatmap helps answer:
 
 ![Cohort Acquisition](cohort_acquisition.png)
 
-
 ### 2️⃣ Retention Trends
 - Visualizes retention decay across cohorts  
 - Identifies churn patterns and engagement drop-off
@@ -334,7 +333,7 @@ The heatmap helps answer:
 - Measures user progression across lifecycle stages  
 - Highlights key conversion bottlenecks
 
-<img width="617" height="346" alt="funnel_conversion" src="https://github.com/user-attachments/assets/8cc627da-763a-4782-9df1-7af3b5f3e432" />
+![Cohort Acquisition](funnel_conversion.png)
 
 
 ---
