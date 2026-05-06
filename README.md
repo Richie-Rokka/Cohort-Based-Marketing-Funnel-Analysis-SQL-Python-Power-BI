@@ -326,7 +326,7 @@ The heatmap helps answer:
 - Visualizes retention decay across cohorts  
 - Identifies churn patterns and engagement drop-off
 
-<img width="614" height="348" alt="retention_analysis" src="https://github.com/user-attachments/assets/e7496520-7128-46aa-989d-e4400be666b9" />
+![Cohort Acquisition](retention_analysis.png)
 
 
 ### 3️⃣ Funnel Conversion
@@ -334,7 +334,6 @@ The heatmap helps answer:
 - Highlights key conversion bottlenecks
 
 ![Cohort Acquisition](funnel_conversion.png)
-
 
 ---
 
