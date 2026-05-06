@@ -320,7 +320,7 @@ The heatmap helps answer:
 - Tracks user acquisition trends across time  
 - Compares cohort sizes and initial engagement
 
-<img width="619" height="347" alt="cohort_acquisition" src="https://github.com/user-attachments/assets/3f29bcba-185a-427e-95d8-2e52a49b5367" />
+![Cohort Acquisition](cohort_acquisition.png)
 
 
 ### 2️⃣ Retention Trends
@@ -339,60 +339,95 @@ The heatmap helps answer:
 
 ---
 
-## ⚡ Key Insights (Executive Summary)
+## 🔍 Key Insights (Cohort + Funnel Synthesis)
 
-- 📉 **Retention drops to ~65% (Month 1) and ~40% (Month 2)**  
-- ⚠️ **Major funnel drop-off at Signup → Activation (~35%)**  
-- 📈 **Later cohorts show +10–15% retention improvement**  
-- 🎯 **Activation—not acquisition—is the primary growth constraint**
+This analysis combines **funnel conversion** and **cohort behavior** to diagnose where growth is constrained and how users progress over time.
 
 ---
 
-## 🔍 Insight Breakdown
+### 1) Front-Loaded Conversion (0–30 Days Window)
+- Month 0 conversion is consistently **~7–8%** across cohorts.
+- Month 1 drops to **~4–6%**, and by Month 2 falls below **2%**.
 
-### 📉 Retention Decay
-- Month 1: ~65% retention  
-- Month 2: ~40% retention  
-➡️ Indicates weak early engagement and onboarding gaps  
-
----
-
-### ⚠️ Funnel Bottleneck
-- Visit → Signup: ~60% conversion  
-- Signup → Activation: ~35% conversion  
-➡️ Largest drop-off occurs at activation stage  
+**Interpretation:**  
+Most users either convert **immediately** or **not at all**. The system is **front-loaded**, with limited delayed conversion.
 
 ---
 
-### 📈 Cohort Improvement Trend
-- Later cohorts show +10–15% higher retention  
-➡️ Suggests improvements in targeting or onboarding  
+### 2) Severe Late-Stage Leakage (SQL → Customer)
+- Funnel analysis shows the largest drop at **SQL → Customer (~67% loss)**.
+- Cohort data confirms that **post–Month 1 recovery is minimal**.
+
+**Interpretation:**  
+Users who reach late stages are **not being effectively closed**. This points to issues in:
+- sales handoff / qualification  
+- pricing or offer friction  
+- closing effectiveness  
 
 ---
 
-### 🎯 Business Interpretation
-- Strong acquisition performance, but weak activation  
-- Retention improvements indicate iterative optimization  
-- Growth is constrained by mid-funnel inefficiencies  
+### 3) No Retention Curve Stabilization
+Typical healthy funnels show: `High → Drop → Stabilize`  
+Observed pattern: `High → Drop → Collapse`
+
+**Interpretation:**  
+There is **no long-term engagement or nurture effect**. Once users fail to convert early, they rarely convert later.
 
 ---
 
-## 📈 Core Metrics
+### 4) Cohort Performance: Slight Downward Trend (with Time Bias)
+- Early cohorts (Jan–Feb) total conversion: **~10–11%**
+- Later cohorts (Apr–May): **~8–9%**
 
-- Cohort Retention Rate  
-- Funnel Conversion Rate  
-- Drop-off Rate by Stage  
-- Active Users per Cohort  
-- Lifecycle Progression  
+⚠️ Note: Later cohorts have **shorter observation windows**, partially understating performance.
+
+**Interpretation:**  
+After adjusting for time bias, results suggest:
+- **stable but not improving** acquisition quality  
+- no meaningful gains in onboarding or targeting  
 
 ---
 
-## 💼 Business Impact
+### 5) Stable Entry Conversion, Limited Optimization
+- Month 0 remains **flat (~7–8%)** across cohorts
 
-- 🎯 Optimize acquisition toward high-retention cohorts  
-- 🔍 Identify and fix onboarding friction  
-- 📉 Reduce churn through early engagement improvements  
-- 📊 Improve overall marketing ROI  
+**Interpretation:**  
+Top-of-funnel is **consistent**, but **not improving**—indicating limited iteration in:
+- targeting  
+- messaging  
+- onboarding  
+
+---
+
+## 🎯 Business Implications
+
+- Growth is **not constrained by acquisition volume**
+- It is constrained by:
+  1. **Late-stage conversion (SQL → Customer)**
+  2. **Lack of lifecycle/nurture beyond Month 1**
+  3. **Static acquisition quality**
+
+---
+
+## 🚀 Recommended Actions
+
+**1. Fix SQL → Customer Conversion**
+- Audit sales handoff and qualification criteria  
+- Test pricing/offer positioning  
+- Improve closing workflows  
+
+**2. Introduce Lifecycle Marketing**
+- Email nurture sequences (30–60 day window)  
+- Retargeting for non-converted SQLs  
+- Structured follow-up cadence  
+
+**3. Optimize for Early Conversion Window**
+- Focus budget and messaging on **first 30 days**  
+- Improve onboarding and activation triggers  
+
+**4. Rebalance Channel Mix**
+- Scale **Referral & Email** (high ROI)  
+- Reduce **LinkedIn** (high CAC, low conversion)  
 
 ---
 
@@ -440,12 +475,10 @@ python python/data_preprocessing.py
 
 ---
 
-## 🧾 Final Takeaway
+## 🧠 Final Takeaway
 
-This project demonstrates how to move from vanity metrics → actionable growth insights.
-
->Growth is not about acquiring users.
->It’s about acquiring users who stay and convert.
+> Growth is not about acquiring more users.  
+> It’s about **converting users within the critical early window** and **removing friction at the point of purchase**.
 
 ---
 
