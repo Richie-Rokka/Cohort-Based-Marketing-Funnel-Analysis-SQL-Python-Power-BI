@@ -1,16 +1,49 @@
-# 📊 Cohort-Based Marketing Funnel Analysis
-**SQL • Python • Power BI | Growth Analytics System**
+# 📊 Cohort-Based Marketing Funnel Analysis  
+**Identifying Conversion Bottlenecks, Retention Decay, and High-ROI Channels**
+
+🚀 End-to-end analytics project combining **SQL, Python, and Power BI** to diagnose where growth breaks across the marketing funnel and how to fix it.
 
 ---
 
-## 🎯 Project Overview
+## 🔍 What This Project Solves
 
-This project analyzes **marketing performance, funnel efficiency, and cohort behavior** to identify where growth is constrained and how to improve conversion and ROI.
+Most teams track:
+- Leads  
+- Conversions  
+- Revenue  
 
-It combines:
+But still can’t answer:
+- **Why users don’t convert**
+- **When conversions actually happen**
+- **Where the funnel breaks**
+
+👉 This project solves that by integrating:
 - **Funnel analysis** → where users drop off  
-- **Cohort analysis** → when users convert over time  
-- **Channel performance** → which sources drive value  
+- **Cohort analysis** → when users convert  
+- **Channel analysis** → which sources drive ROI  
+
+---
+
+## 📈 Key Results (Executive Snapshot)
+
+- 🚨 **67% drop-off at SQL → Customer** (primary bottleneck)  
+- 📉 **<2% conversion after Month 2** (no delayed conversion)  
+- ⚡ **Conversions are front-loaded (0–30 days)**  
+- 💸 **LinkedIn = highest CAC, lowest efficiency**  
+- 🏆 **Referral & Email = highest ROI channels**
+
+---
+
+## 🧠 Why This Matters
+
+> Growth is not limited by acquisition.  
+> It is constrained by **conversion efficiency and timing**.
+
+This analysis shows how to:
+- Reduce funnel leakage  
+- Improve sales conversion  
+- Reallocate marketing spend  
+- Focus on the highest-impact growth window  
 
 ---
 
@@ -45,6 +78,29 @@ Key questions:
 | stage | Funnel stage (Lead, MQL, SQL, Customer) |
 | stage_date | Date stage was reached |
 | revenue | Revenue generated (Customer stage only) |
+
+---
+
+## 📐 Data Model
+
+```mermaid
+erDiagram
+    leads ||--o{ lead_stage_events : has
+
+    leads {
+        int lead_id PK
+        date created_date
+        string channel
+        float acquisition_cost
+    }
+
+    lead_stage_events {
+        int lead_id FK
+        string stage
+        date stage_date
+        float revenue
+    }
+```
 
 ---
 
@@ -121,6 +177,41 @@ ORDER BY cohort_date, cohort_index;
 
 ---
 
+## 📊 Dashboard Walkthrough
+
+### 1️⃣ Executive Summary
+- Revenue, Customers, CAC, ROI  
+- Channel performance comparison  
+
+---
+
+### 2️⃣ Funnel Analysis
+- Lead → MQL → SQL → Customer  
+- Drop-off identification  
+- Conversion rates between stages  
+
+---
+
+### 3️⃣ Cohort Analysis
+- Conversion over time  
+- Retention heatmap  
+- Time-to-conversion insights  
+
+---
+
+## 🖼️ Dashboard Preview
+
+### 📊 Executive Summary
+![Executive Summary](dashboard/cohort_acquisition.png)
+
+### 🔻 Funnel Analysis
+![Funnel Analysis](dashboard/funnel_conversion.png)
+
+### 📈 Cohort Analysis
+![Cohort Analysis](dashboard/retention_analysis.png)
+
+---
+
 ## 🎨 Cohort Heatmap — How to Read It
 
 The SQL output is visualized as a **cohort heatmap**:
@@ -157,28 +248,6 @@ Shows **performance changes across acquisition periods**
 
 #### 3. Diagonal Trends
 Indicate whether performance is **improving or declining over time**
-
----
-
-## 📊 Dashboard Walkthrough
-
-### 1️⃣ Executive Summary
-- Revenue, Customers, CAC, ROI  
-- Channel performance comparison  
-
----
-
-### 2️⃣ Funnel Analysis
-- Lead → MQL → SQL → Customer  
-- Drop-off identification  
-- Conversion rates between stages  
-
----
-
-### 3️⃣ Cohort Analysis
-- Conversion over time  
-- Retention heatmap  
-- Time-to-conversion insights  
 
 ---
 
