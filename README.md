@@ -47,15 +47,85 @@ This analysis shows how to:
 
 ---
 
-## 🧠 Business Problem
+## 📖 Case Study: From Data to Decision
 
-Despite strong lead generation, conversion to customers remains low.
+### 🧩 Problem
+A marketing team was generating leads but struggling to convert them into customers. The key challenge was identifying whether the issue was:
+- Poor acquisition quality  
+- Funnel inefficiencies  
+- Lack of user engagement over time  
 
-Key questions:
-- Where is the biggest drop-off in the funnel?
-- Do users convert over time or only immediately?
-- Which channels deliver the best ROI?
-- Is growth limited by acquisition or conversion?
+---
+
+### 🔍 Approach
+I built a **multi-layered analytics system** combining:
+
+- Funnel analysis → Identify drop-offs  
+- Cohort analysis → Understand time-based behavior  
+- Channel analysis → Measure ROI and efficiency  
+
+---
+
+### ⚙️ Solution
+- Designed a cohort model using SQL (based on `created_date` and `stage_date`)
+- Built a funnel conversion framework (Lead → MQL → SQL → Customer)
+- Developed an interactive Power BI dashboard to visualize:
+  - Conversion bottlenecks  
+  - Retention decay  
+  - Channel performance  
+
+---
+
+### 📊 Key Findings
+- 🚨 Largest drop-off at SQL → Customer (~67%)  
+- 📉 Conversions heavily front-loaded (0–30 days)  
+- 🔁 No delayed conversion or lifecycle recovery  
+- 💸 LinkedIn shows high CAC with low conversion  
+
+---
+
+### 💡 Business Recommendations
+- Improve sales closing process and qualification  
+- Introduce lifecycle marketing (email, retargeting)  
+- Focus on early conversion window  
+- Reallocate budget to high-performing channels  
+
+---
+
+### 🎯 Outcome
+This analysis transforms raw data into **clear, actionable growth strategy**, enabling stakeholders to:
+- Reduce churn  
+- Improve conversion  
+- Maximize ROI
+
+---
+
+## ❓ Business Questions Answered
+
+- Which acquisition channels generate the highest ROI?
+- Where does the largest funnel drop-off occur?
+- How quickly do users convert after acquisition?
+- Are newer cohorts improving over time?
+- Which channels should receive more budget allocation?
+
+---
+
+## 📂 Repository Structure
+
+```text
+├── dashboard/
+│   ├── cohort_acquisition.png
+│   ├── funnel_conversion.png
+│   └── retention_analysis.png
+├── data/
+│   ├── leads.csv
+│   └── lead_stage_events.csv
+├── sql/
+│   └── sql_cohort_analysis.sql
+├── Cohort_Funnel_Analytics.pbix
+├── cohort_python_starter.py
+└── README.md
+```
 
 ---
 
@@ -100,6 +170,22 @@ erDiagram
         date stage_date
         float revenue
     }
+```
+
+---
+
+## 🔄 Analytics Workflow
+
+```text
+Leads Data
+   ↓
+SQL Cohort Modeling
+   ↓
+Python Preprocessing
+   ↓
+Power BI Semantic Layer
+   ↓
+Executive Dashboard & Funnel Analytics
 ```
 
 ---
@@ -177,42 +263,7 @@ ORDER BY cohort_date, cohort_index;
 
 ---
 
-## 📊 Dashboard Walkthrough
-
-### 1️⃣ Executive Summary
-- Revenue, Customers, CAC, ROI  
-- Channel performance comparison  
-
----
-
-### 2️⃣ Funnel Analysis
-- Lead → MQL → SQL → Customer  
-- Drop-off identification  
-- Conversion rates between stages  
-
----
-
-### 3️⃣ Cohort Analysis
-- Conversion over time  
-- Retention heatmap  
-- Time-to-conversion insights  
-
----
-
-## 🖼️ Dashboard Preview
-
-### 📊 Executive Summary
-![Executive Summary](dashboard/cohort_acquisition.png)
-
-### 🔻 Funnel Analysis
-![Funnel Analysis](dashboard/funnel_conversion.png)
-
-### 📈 Cohort Analysis
-![Cohort Analysis](dashboard/retention_analysis.png)
-
----
-
-## 🎨 Cohort Heatmap — How to Read It
+## 🎨 Time-to-Conversion Cohort Heatmap — How to Read It
 
 The SQL output is visualized as a **cohort heatmap**:
 
@@ -248,6 +299,41 @@ Shows **performance changes across acquisition periods**
 
 #### 3. Diagonal Trends
 Indicate whether performance is **improving or declining over time**
+
+---
+
+## 📊 Dashboard Walkthrough
+
+### 1️⃣ Executive Summary
+- Revenue, Customers, CAC, ROI  
+- Channel performance comparison  
+
+---
+
+### 2️⃣ Funnel Analysis
+- Lead → MQL → SQL → Customer  
+- Drop-off identification  
+- Conversion rates between stages  
+
+---
+
+### 3️⃣ Cohort Analysis
+- Conversion over time  
+- Retention heatmap  
+- Time-to-conversion insights  
+
+---
+
+## 🖼️ Dashboard Preview
+
+### 📊 Executive Summary
+![Executive Summary](dashboard/cohort_acquisition.png)
+
+### 🔻 Funnel Analysis
+![Funnel Analysis](dashboard/funnel_conversion.png)
+
+### 📈 Cohort Analysis
+![Cohort Analysis](dashboard/retention_analysis.png)
 
 ---
 
