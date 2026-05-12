@@ -434,7 +434,8 @@ This system enables:
 
 - SQL → Cohort & funnel modeling  
 - Python (Pandas) → Data processing  
-- Power BI → Dashboard & visualization  
+- Power BI → Dashboard & visualization
+- Gen AI → Synthetic Dataset & Debugging
 - GitHub → Version control  
 
 ---
